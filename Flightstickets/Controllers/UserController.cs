@@ -1,5 +1,6 @@
 ﻿using Flightstickets.Models;
 using Flightstickets.Services;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -96,4 +97,25 @@ public class UserController : ControllerBase
             return StatusCode(500, $"Internal server error: {ex.Message}");
         }
     }
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+    {
+        if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
+        {
+            return BadRequest("Invalid request");
+        }
+
+        var user = await _userService.GetUserByEmailAndPasswordAsync(loginRequest.Email, loginRequest.Password);
+
+        if (user == null)
+        {
+            return NotFound("Invalid email or password");
+        }
+
+        // You can add additional logic here, such as creating a token for authentication.
+        // For simplicity, we'll just return the user details.
+
+        return Ok(user);
+    }
 }
+

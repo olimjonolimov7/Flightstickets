@@ -7,4 +7,6 @@ public interface IUserService
     void AddUser(User user);
     void UpdateUser(User user);
     void DeleteUser(int userId);
+    Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
+
 }

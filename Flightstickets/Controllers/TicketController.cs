@@ -45,6 +45,22 @@ public class TicketController : ControllerBase
             return StatusCode(500, $"Internal server error: {ex.Message}");
         }
     }
+    [HttpGet("{ticketId}")]
+    public ActionResult<Ticket> GetTicketByUserId(int userId)
+    {
+        try
+        {
+            var ticket = _ticketService.GetTicketByUserId(userId);
+            if (ticket == null)
+                return NotFound();
+
+            return Ok(ticket);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
 
     [HttpPost]
     public ActionResult<Ticket> AddTicket([FromBody] Ticket ticket)

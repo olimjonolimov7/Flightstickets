@@ -1,4 +1,6 @@
 ﻿using Flightstickets.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,6 +46,12 @@ namespace Flightstickets.Services;
                 _dbContext.SaveChanges();
             }
         }
-    }
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
+        {
+            return await _dbContext.Users
+           .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+         }
+         
+     }
 
 

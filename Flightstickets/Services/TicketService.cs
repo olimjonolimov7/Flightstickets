@@ -24,6 +24,11 @@ public class TicketService : ITicketService
         return _dbContext.Tickets.Find(ticketId);
     }
 
+    public Ticket GetTicketByUserId(int userId)
+    {
+        return _dbContext.Tickets.Find(userId);
+    }
+
     public void AddTicket(Ticket ticket)
     {
         _dbContext.Tickets.Add(ticket);

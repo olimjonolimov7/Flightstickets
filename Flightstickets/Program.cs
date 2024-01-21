@@ -40,4 +40,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors(builder =>
+       builder.WithOrigins("http://example.com")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials());
+
 app.Run();

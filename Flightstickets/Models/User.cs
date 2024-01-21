@@ -22,12 +22,12 @@ public class User
 
     [Required]
     [StringLength(100)]
-    [Column("first_name")]
+    [Column("firstname")]
     public string FirstName { get; set; }
 
     [Required]
     [StringLength(100)]
-    [Column("last_name")]
+    [Column("lastname")]
     public string LastName { get; set; }
 
     [Required]
